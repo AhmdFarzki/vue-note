@@ -1,5 +1,5 @@
 <template>
-    <div class="container">Home Page</div>
+    <div class="container">Laravel Vue SPA Note</div>
 </template>
 
 <script>
