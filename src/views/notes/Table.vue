@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>Table of Note</h3>
+        <h3>Table of Notes</h3>
 
         <table class="table table-striped">
             <thead class="thead-dark">
