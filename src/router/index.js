@@ -1,29 +1,57 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import EditNote from "../views/notes/Edit";
+import NewNote from "../views/notes/Create";
+import TableOfNote from "../views/notes/Table";
+import ShowTheNote from "../views/notes/Show";
+import Contact from "../views/Contact";
+import About from "../views/About";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "home",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/about",
+    name: "pages.about",
+    component: About,
+  },
+  {
+    path: "/contact",
+    name: "pages.contact",
+    component: Contact,
+  },
+  {
+    path: "/notes/create",
+    name: "notes.create",
+    component: NewNote,
+  },
+  {
+    path: "/notes/table",
+    name: "notes.table",
+    component: TableOfNote,
+  },
+  {
+    path: "/notes/:noteSlug",
+    name: "notes.show",
+    component: ShowTheNote,
+  },
+  {
+    path: "/notes/:noteSlug/edit",
+    name: "notes.edit",
+    component: EditNote,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
