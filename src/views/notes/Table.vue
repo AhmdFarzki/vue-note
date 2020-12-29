@@ -1,69 +1,67 @@
 <template>
-  <div class="container">
-    <h3>Table of Note</h3>
-    <div class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Subject</th>
-          <th>Publish</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="note in notes" :key="note.id">
-          <td>
-            <router-link
-              :to="{
-                name: 'notes.show',
-                params: { noteSlug: note.slug },
-              }"
-              >{{ note.title }}</router-link
-            >
-          </td>
-          <td>{{ note.subject }}</td>
-          <td>{{ note.published }}</td>
-          <td>
-            <router-link
-              :to="{
-                name: 'notes.edit',
-                params: { noteSlug: note.slug },
-              }"
-              >Edit</router-link
-            >
-          </td>
-          <td>
-            <delete-note :endpoint="note.slug" />
-          </td>
-        </tr>
-      </tbody>
+    <div class="container">
+        <h3>Table of Note</h3>
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Publish</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="note in notes" :key="note.id">
+                    <td>
+                        <router-link
+                            :to="{
+                                name: 'notes.show',
+                                params: { noteSlug: note.slug }
+                            }"
+                            >{{ note.title }}</router-link
+                        >
+                    </td>
+                    <td>{{ note.subject }}</td>
+                    <td>{{ note.published }}</td>
+                    <td>
+                        <router-link
+                            :to="{
+                                name: 'notes.edit',
+                                params: { noteSlug: note.slug }
+                            }"
+                            >Edit</router-link
+                        >
+                        <delete-note :endpoint="note.slug" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
 </template>
 
 <script>
-import axios from "axios";
 import DeleteNote from "./Delete";
 
 export default {
-  components: {
-    DeleteNote,
-  },
-  data() {
-    return {
-      notes: [],
-    };
-  },
-
-  mounted() {
-    this.getNotes();
-  },
-
-  methods: {
-    async getNotes() {
-      let { data } = await axios.get("/api/notes");
-      this.notes = data.data;
+    components: {
+        DeleteNote
     },
-  },
+    data() {
+        return {
+            notes: []
+        };
+    },
+
+    mounted() {
+        this.getNotes();
+    },
+
+    methods: {
+        async getNotes() {
+            let { data } = await axios.get("/api/notes");
+            this.notes = data.data;
+        }
+    }
 };
 </script>
